@@ -1,0 +1,31 @@
+---
+
+- name: Clone dotfiles
+  tags: dotfiles.clone
+  become: yes
+  become_user: "{{ logged_user }}"
+  git: repo=https://github.com/thlorenz/dotfiles.git
+       depth=1
+       dest=/home/{{ logged_user }}/dotfiles
+  when: DOTFILES
+
+- name: Link rc files
+  tags: dotfiles.link
+  become: yes
+  become_user: "{{ logged_user }}"
+  file: src=./dotfiles/{{ item.src }} state=link dest=/home/{{ logged_user }}/{{ item.dst }} force=true owner={{ logged_user }} group={{ logged_user }}
+  with_items:
+    - { src: bashrc             , dst: .bashrc }
+    - { src: bashprofile        , dst: .profile }
+    - { src: inputrc            , dst: .inputrc }
+    - { src: vim                , dst: .vim   }
+    - { src: vimrc              , dst: .vimrc }
+    - { src: gitconfig          , dst: .gitconfig }
+    - { src: gitignore          , dst: .gitignore }
+    - { src: tigrc              , dst: .tigrc }
+    - { src: cardinalrc         , dst: .cardinalrc }
+    - { src: agignore           , dst: .agignore }
+    - { src: tmux/tmux.conf     , dst: .tmux.conf }
+    - { src: lldb/lldbinit-lldb , dst: .lldbinit-lldb }
+    - { src: tern-config        , dst: .tern-config }
+  when: DOTFILES

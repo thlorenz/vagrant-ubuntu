@@ -1,0 +1,15 @@
+---
+- hosts         : localhost
+  gather_facts  : True
+  remote_user   : vagrant
+  become        : yes
+  become_method : sudo
+
+  roles:
+    - dependencies
+    - dotfiles
+    - devel
+    - vim
+
+# -*- mode: ansible -*-
+# vi: set ft=ansible :

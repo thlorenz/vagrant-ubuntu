@@ -1,0 +1,13 @@
+---
+# Variables listed here are applicable to all host groups.
+
+ansible_python_interpreter: /usr/bin/python2
+
+logged_user: vagrant
+
+PERF     : "{{cli_perf}}"
+LLDB     : "{{cli_lldb}}"
+CLANG    : "{{cli_clang}}"
+DEVEL    : "{{cli_devel}}"
+DOTFILES : "{{cli_dotfiles}}"
+VIM      : "{{cli_vim}}"

@@ -1,0 +1,9 @@
+ubuntuhost ansible_ssh_port=22 ansible_ssh_host=192.168.50.51 ansible_ssh_user=vagrant ansible_user=vagrant
+
+localhost ansible_connection=local
+
+[ubuntu]
+ubuntuhost
+
+[local]
+localhost

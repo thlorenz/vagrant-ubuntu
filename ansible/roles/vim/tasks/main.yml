@@ -1,0 +1,8 @@
+---
+
+- name: Add vim 
+  tags: vim.vim
+  apt: name="{{ item }}" state=present
+  with_items: 
+    - vim-nox
+  when: VIM

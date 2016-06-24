@@ -1,0 +1,8 @@
+{
+  "cli_perf"     : true,
+  "cli_lldb"     : true,
+  "cli_clang"    : true,
+  "cli_devel"    : true,
+  "cli_dotfiles" : true,
+  "cli_vim"      : true
+}

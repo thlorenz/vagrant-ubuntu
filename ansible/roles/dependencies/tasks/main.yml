@@ -1,0 +1,27 @@
+---
+
+- name: Update apt-get cache
+  tags: dependencies.update
+  apt: update_cache=yes
+
+- name: Add linux linux-headers
+  tags: dependencies.linux-headers
+  shell: apt install -y linux-headers-$(uname -r)
+
+- name: Add core development dependencies
+  tags: dependencies.core-devel
+  apt: name="{{ item }}" state=latest
+  with_items:
+    - build-essential
+
+- name: Add core utils
+  tags: dependencies.utils
+  apt: name="{{ item }}" state=latest
+  with_items:
+    - git
+    - tmux
+    - iotop
+    - ncdu
+    - netcat-traditional
+    - silver_searcher-ag
+    - htop

@@ -1,0 +1,37 @@
+---
+
+- name: Add C/C++ dependencies
+  tags: devel.c
+  apt: name="{{ item }}" state=present
+  with_items:
+    - valgrind
+    - libunistring-dev
+    - cmake
+    - ninja-build
+  when: DEVEL
+
+- name: Add assembly dependencies
+  tags: devel.assembly
+  apt: name="{{ item }}" state=present
+  with_items: nasm
+  when: DEVEL
+
+# optional extras
+- name: Add clang
+  tags: devel.clang
+  apt: name="{{ item }}" state=present
+  with_items:
+    - clang
+  when: CLANG
+
+- name: Add lldb
+  tags: devel.lldb
+  apt: name="{{ item }}" state=present
+  with_items: lldb
+  when: LLDB
+
+- name: Add perf
+  tags: devel.perf
+  apt: name="{{ item }}" state=present
+  with_items: perf
+  when: PERF
