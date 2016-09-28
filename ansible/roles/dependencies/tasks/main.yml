@@ -19,9 +19,7 @@
   apt: name="{{ item }}" state=latest
   with_items:
     - git
-    - tmux
     - iotop
     - ncdu
     - netcat-traditional
-    - silver_searcher-ag
     - htop
