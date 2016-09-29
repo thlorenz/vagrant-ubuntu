@@ -6,7 +6,6 @@
 VAGRANTFILE_API_VERSION = "2"
 
 IP = '192.168.50.51'
-FWPORTS = ENV['FWPORTS']
 
 # optional dependencies, these vars are picked
 # up inside the ansible roles (see ansible/group_vars)
@@ -42,9 +41,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network :private_network, ip: IP
 
-  if FWPORTS
-    for port in 5000..5200
-      config.vm.network :forwarded_port, host: port, guest: port
-    end
+  appd_ports = [ 8090, 3388, 4848, 7676, 3700, 8181, 9080, 9081, 9200, 8020, 8021 ]
+  extra_ports = [ 5050, 5051 ]
+  for port in appd_ports
+    config.vm.network :forwarded_port, host: port, guest: port
   end
+  for port in extra_ports
+    config.vm.network :forwarded_port, host: port, guest: port
+  end
+
+  # appd requires minimum of 50GB disk size for DEMO (we have 40GB .. hope we're fine)
+  # Obtained UUID via: VBoxManage list hdds
+  # below not working due to disk type and only hard to figure out: http://unix.stackexchange.com/a/250679
+  #config.vm.provider "virtualbox" do |vb|
+    #vb.customize ["modifyhd", "d57cc11e-860b-4782-90fd-d433bf4905ab", "--resize", "100000"]
+  #end
 end
