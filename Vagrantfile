@@ -6,7 +6,6 @@
 VAGRANTFILE_API_VERSION = "2"
 
 IP = '192.168.50.51'
-FWPORTS = ENV['FWPORTS']
 
 # optional dependencies, these vars are picked
 # up inside the ansible roles (see ansible/group_vars)
@@ -42,9 +41,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network :private_network, ip: IP
 
-  if FWPORTS
-    for port in 5000..5200
-      config.vm.network :forwarded_port, host: port, guest: port
-    end
+  frontend_ports = [ 8023, 2021 ]
+  for port in frontend_ports
+    config.vm.network :forwarded_port, host: port, guest: port
   end
 end
