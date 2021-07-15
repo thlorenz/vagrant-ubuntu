@@ -5,7 +5,6 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-IP = '192.168.50.51'
 FWPORTS = ENV['FWPORTS']
 
 # optional dependencies, these vars are picked
@@ -40,7 +39,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.cpus = cpus 
   end
 
-  config.vm.network :private_network, ip: IP
+  config.vm.network "private_network", type: "dhcp"
 
   if FWPORTS
     for port in 5000..5200
