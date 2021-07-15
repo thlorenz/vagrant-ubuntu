@@ -17,7 +17,7 @@ DOTFILES = ENV['DOTFILES']
 VIM      = ENV['VIM']
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/focal64"
 
   host = RbConfig::CONFIG['host_os']
 
